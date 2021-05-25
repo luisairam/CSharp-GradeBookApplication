@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace GradeBook.GradeBooks
 {
@@ -19,17 +20,16 @@ namespace GradeBook.GradeBooks
 
             }
 
-            int total = Students.Count;
-            int pos = total - Students.OrderByDescending(x => x.AverageGrade).SkipWhile(x => x.AverageGrade == averageGrade).Count();
-            double porc = (pos * 100) / total;
-
-            if (porc <= 20)
+            var threshold = (int)Math.Ceiling(Students.Count * 0.2);
+            var grades = Students.OrderByDescending(x => x.AverageGrade).Select(e => e.AverageGrade).ToList();
+            
+            if(averageGrade >= grades[threshold-1])
                 return 'A';
-            if (porc >= 20 && porc < 40)
+            if (averageGrade < grades[threshold - 1] && averageGrade >= grades[threshold * 2 - 1])
                 return 'B';
-            if (porc >= 40 && porc < 60)
+            if (averageGrade >= grades[threshold * 2 - 1] && averageGrade >= grades[threshold * 3 - 1])
                 return 'C';
-            if (porc >= 60 && porc < 80)
+            if (averageGrade >= grades[threshold * 3 - 1] && averageGrade >= grades[threshold * 4 - 1])
                 return 'D';
             return 'F';
         }
