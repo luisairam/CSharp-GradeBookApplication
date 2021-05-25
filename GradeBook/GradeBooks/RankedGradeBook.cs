@@ -20,7 +20,7 @@ namespace GradeBook.GradeBooks
             }
 
             int total = Students.Count;
-            int pos = total - Students.SkipWhile(x => x.AverageGrade == averageGrade).OrderBy(x => x.AverageGrade).Count();
+            int pos = total - Students.OrderBy(x => x.AverageGrade).SkipWhile(x => x.AverageGrade == averageGrade).Count();
             double porc = (pos * 100) / total;
 
             if (porc <= 20)
