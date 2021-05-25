@@ -26,11 +26,11 @@ namespace GradeBook.GradeBooks
 
             if (porc <= 20)
                 return 'A';
-            if (porc > 20 && porc <= 40)
+            if (porc >= 20 && porc < 40)
                 return 'B';
-            if (porc > 40 && porc <= 60)
+            if (porc >= 40 && porc < 60)
                 return 'C';
-            if (porc > 60 && porc <= 80)
+            if (porc >= 60 && porc < 80)
                 return 'D';
             return 'F';
         }
